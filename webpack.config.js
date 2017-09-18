@@ -24,11 +24,20 @@ module.exports = {
                 }
             },
             {
-                test: /\.scss$/,
+                test: /\.(scss|css)$/,
                 exclude: ENTRY + 'node_modules',
                 use: ExtractTextPlugin.extract({
                     fallback: 'style-loader',
-                    use: ['css-loader', 'sass-loader']
+                    use: [
+                        {
+                            loader: 'css-loader',
+                            options: {
+                                importLoaders: 2
+                            }
+                        },
+                        'postcss-loader',
+                        'sass-loader'
+                    ]
                 })
             },
 			{
