@@ -5,6 +5,7 @@ var ENTRY = path.resolve(__dirname);
 var OUTPUT = path.resolve(__dirname, './output');
 
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
     entry: ENTRY + '/src/app/app.js',
@@ -48,7 +49,11 @@ module.exports = {
                 drop_console: false,
             }
         }),
-        new ExtractTextPlugin('style.css')
+        new ExtractTextPlugin('style.css'),
+		new HtmlWebpackPlugin({
+			title: 'SHARK',
+			template: 'index.html'
+		})
     ]
 
 };
