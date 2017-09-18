@@ -30,7 +30,18 @@ module.exports = {
                     fallback: 'style-loader',
                     use: ['css-loader', 'sass-loader']
                 })
-            }
+            },
+			{
+				test: /\.(png|jpg|gif)$/,
+				use: [
+				  {
+					loader: 'url-loader',
+					options: {
+					  limit: 8192
+					}  
+				  }
+				]
+			}
         ]
     },
     plugins: [
@@ -52,6 +63,7 @@ module.exports = {
         new ExtractTextPlugin('style.css'),
 		new HtmlWebpackPlugin({
 			title: 'SHARK',
+			favicon: 'static/images/shark.ico',
 			template: 'index.html'
 		})
     ]
