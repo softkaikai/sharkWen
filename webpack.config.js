@@ -20,7 +20,7 @@ module.exports = {
                 exclude: ENTRY + 'node_modules',
                 loader: 'babel-loader',
                 query: {
-                    presets: ['es2015', 'react', 'stage-2']
+                    presets: ['es2015', 'react', 'stage-0']
                 }
             },
             {
@@ -43,12 +43,13 @@ module.exports = {
 			{
 				test: /\.(png|jpg|gif)$/,
 				use: [
-				  {
-					loader: 'url-loader',
-					options: {
-					  limit: 8192
-					}  
-				  }
+                  {
+                    loader: 'url-loader',
+                    options: {
+                        limit: 8192,
+                        name: 'images/[name].[ext]'
+                    }
+                  }
 				]
 			}
         ]

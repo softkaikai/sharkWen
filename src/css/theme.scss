@@ -1,0 +1,44 @@
+/***********border-color******************/
+$bd-c: #A9A9A9;
+/*************font-color*********************/
+$fc: #333;
+/***********color************/
+$blue: #2970ff;
+/**********border-radius***************/
+@mixin border-radius($value: 4px) {
+  border-radius: $value;
+}
+.border-radius {
+  @include border-radius;
+}
+/**********border***********/
+@mixin border-all($value: 1px, $color: $bd-c) {
+  border: $value solid $color;
+}
+.border-all {
+  @include border-all;
+}
+@mixin border-l($value: 1px, $color: $bd-c) {
+  border-left: $value solid $color;
+}
+.border-l {
+  @include border-l;
+}
+@mixin border-r($value: 1px, $color: $bd-c) {
+  border-right: $value solid $color;
+}
+.border-r {
+  @include border-r;
+}
+@mixin border-top($value: 1px, $color: $bd-c) {
+  border-top: $value solid $color;
+}
+.border-top {
+  @include border-top;
+}
+@mixin border-bottom($value: 1px, $color: $bd-c) {
+  border-bottom: $value solid $color;
+}
+.border-bottom {
+  @include border-bottom;
+}

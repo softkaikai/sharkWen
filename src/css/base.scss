@@ -1,0 +1,73 @@
+.float-l {
+  float: left !important;
+}
+.float-r {
+  float: right !important;
+}
+/********position*************/
+.pr {
+  position: relative !important;
+}
+.pa {
+  position: absolute !important;
+}
+.pf {
+  position: fixed !important;
+}
+.ps {
+  position: static !important;
+}
+/**********清楚浮动******************/
+.clear {
+  zoom: 1;
+  &:after {
+    content: "";
+    display: block;
+    height: 0;
+    clear: both;
+  }
+}
+/********margin*************/
+@for $val from 1 through 10 {
+  .ml-#{$val*10} {
+    margin-left: #{$val*10}px !important;
+  }
+  .mr-#{$val*10} {
+    margin-right: #{$val*10}px !important;
+  }
+  .mt-#{$val*10} {
+    margin-top: #{$val*10}px !important;
+  }
+  .mb-#{$val*10} {
+    margin-bottom: #{$val*10}px !important;
+  }
+}
+
+/**********padding*************/
+@for $val from 1 through 10 {
+  .pl-#{$val*10} {
+    padding-left: #{$val*10}px !important;
+  }
+  .pr-#{$val*10} {
+    padding-right: #{$val*10}px !important;
+  }
+  .pt-#{$val*10} {
+    padding-top: #{$val*10}px !important;
+  }
+  .pb-#{$val*10} {
+    padding-bottom: #{$val*10}px !important;
+  }
+}
+/*********height-percent******************/
+@for $val from 1 through 10 {
+  .hp-#{$val*10} {
+    height: #{$val*10 + '%'} !important;
+  }
+}
+/**********font-size************/
+@for $val from 1 through 20 {
+  .fs-#{$val + 12} {
+    font-size: #{$val + 12}px !important;
+  }
+}
+
