@@ -90,17 +90,54 @@ class CarouselPagination extends Component {
         )
     }
 }
+import musicIcon from '../../images/music/wave.gif';
+class IndexMusicIcon extends Component {
+    constructor() {
+        super();
+        this.songLoad = this.songLoad.bind(this);
+    }
+    songLoad() {
+        this.refs.myAudio.play();
+        this.refs.myAudio.volume = 0.5;
+        this.props.changeLoading();
+    }
+    render() {
+        let audioUrl = 'http://ovegl1dz1.bkt.clouddn.com/music/song1.mp3';
+        return (
+            <div className="carousel__music-icon">
+                <img src={musicIcon} alt=""/>
+                <audio src={audioUrl}
+                       ref="myAudio"
+                       loop
+                       onCanPlay={this.songLoad}
+                       id="myAudio"
+                ></audio>
+            </div>
+        )
+    }
+}
+
+import FullScreenLoading from '../Loading/FullScreenLoading';
 
 class IndexCarousel extends Component {
     constructor(props) {
         super(props);
-        this.state = {currentIndex: 0};
+        this.state = {
+            currentIndex: 0,
+            showLoading: true
+        };
         this.changeIndex = this.changeIndex.bind(this);
+        this.changeLoading = this.changeLoading.bind(this);
     }
     changeIndex(index) {
         this.setState({
             currentIndex: index
         })
+    }
+    changeLoading() {
+        this.setState({
+            showLoading: false
+        });
     }
     render() {
         return (
@@ -108,7 +145,10 @@ class IndexCarousel extends Component {
                 <CarouselLeft currentIndex={this.state.currentIndex} />
                 <CarouselRight currentIndex={this.state.currentIndex} />
                 <CarouselMenu />
-                <CarouselPagination currentIndex={this.state.currentIndex}  changeIndex={this.changeIndex} />
+                <CarouselPagination currentIndex={this.state.currentIndex}
+                                    changeIndex={this.changeIndex} />
+                <IndexMusicIcon changeLoading={this.changeLoading} />
+                <FullScreenLoading showLoading={this.state.showLoading} />
             </div>
         )
     }

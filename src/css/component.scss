@@ -28,7 +28,7 @@
   top: 0;
   width: 100%;
   height: 100%;
-  transition: all 1s linear;
+  transition: all 1s ease-in;
 }
 .carousel__lun_r {
   position: absolute;
@@ -36,7 +36,7 @@
   top: 0;
   width: 100%;
   height: 100%;
-  transition: all 2s linear;
+  transition: all 1s ease-out;
 }
 .carousel__lun-item {
   position: relative;
@@ -97,4 +97,35 @@
 .carousel__circle_active {
   background: $blue;
 }
+.carousel__music-icon {
+  position: absolute;
+  right: 20px;
+  top: 28px;
+
+  width: 10px;
+  height: 10px;
+}
+
+.fullLoading {
+  position: fixed;
+  left: 0;
+  top: 0;
+
+  width: 100%;
+  height: 100%;
+
+  background: #e2e0e0;
+  z-index: 1000000000;
+}
+.fullLoading__img {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+
+  width: 206px;
+  height: 206px;
+  margin: -103px 0 0 -103px;
+}
+
+
 
