@@ -70,4 +70,13 @@
     font-size: #{$val + 12}px !important;
   }
 }
-
+/************全屏*****************/
+.full-screen {
+  width: 100%;
+  height: 100%;
+}
+/*********换行***************/
+.change-line {
+  word-break: break-all;
+  word-wrap: break-word;
+}

@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Link, IndexLink} from 'react-router';
 
 import carouselImg1 from '../../images/carousel1.jpg';
 import carouselImg2 from '../../images/carousel2.jpg';
@@ -71,6 +72,21 @@ class CarouselMenu extends Component {
     }
 }
 
+class CarouselMenuIcon extends Component {
+    openMenu = () => {
+        document.querySelector('.indexMenu').style.right = '0';
+    }
+    render() {
+        return (
+            <div className="carousel__menu-icon"
+                 onClick={this.openMenu}
+            >
+
+            </div>
+        )
+    }
+}
+
 class CarouselPagination extends Component {
     render() {
         let liArr = [];
@@ -95,16 +111,24 @@ class IndexMusicIcon extends Component {
     constructor() {
         super();
         this.songLoad = this.songLoad.bind(this);
+        this.switchSong = this.switchSong.bind(this);
     }
     songLoad() {
         this.refs.myAudio.play();
         this.refs.myAudio.volume = 0.5;
         this.props.changeLoading();
     }
+    switchSong() {
+        if(this.refs.myAudio.paused) {
+            this.refs.myAudio.play();
+        } else {
+            this.refs.myAudio.pause();
+        }
+    }
     render() {
         let audioUrl = 'http://ovegl1dz1.bkt.clouddn.com/music/song1.mp3';
         return (
-            <div className="carousel__music-icon">
+            <div className="carousel__music-icon" onClick={this.switchSong}>
                 <img src={musicIcon} alt=""/>
                 <audio src={audioUrl}
                        ref="myAudio"
@@ -119,19 +143,126 @@ class IndexMusicIcon extends Component {
 
 import FullScreenLoading from '../Loading/FullScreenLoading';
 
+let gradientArr = ['red-gradient','pink-gradient','orange-gradient','yellow-gradient','green-gradient','blue-gradient','purple-gradient',];
+let menus = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
+let menuIcons = ['indexMenu__icon-text','indexMenu__icon-table','indexMenu__icon-setting','indexMenu__icon-internation','indexMenu__icon-game','indexMenu__icon-picture','indexMenu__icon-star'];
+let childMenu = [
+    {
+        title: 'js位运算符妙用☺',
+        url: '/monday/bitOperator'
+    },
+    {
+        title: '2008年北京奥运会',
+        url: '/monday/1'
+    },
+    {
+        title: '2008年北京奥运会',
+        url: '/monday/2'
+    },
+    {
+        title: '2008年北京奥运会',
+        url: '/monday/3'
+    },
+    {
+        title: '2008年北京奥运会',
+        url: '/monday/4'
+    },
+    {
+        title: '2008年北京奥运会',
+        url: '/monday/5'
+    },
+    {
+        title: '2008年北京奥运会',
+        url: '/monday/6'
+    }
+];
+import DataLoading from '../Loading/DataLoading';
+class IndexMenu extends Component {
+    closeMenu = () => {
+        document.querySelector('.indexMenu').style.right = '100%';
+    }
+    render() {
+        let indexGradient = 'indexMenu ';
+        indexGradient += gradientArr[this.props.currentMenu || 0];
+        let menuItem = [];
+        for(let [index, val] of menus.entries()) {
+            let tempClassName = 'indexMenu__menu-item';
+            let tempMenu = '';
+            if(this.props.currentMenu === index) {
+                tempClassName += ' indexMenu__menu-item_active';
+                tempMenu = <div className={tempClassName}
+                                     onClick={this.props.changeMenu.bind(this, index)}
+                >
+                    {val}
+                    <div className={menuIcons[this.props.currentMenu]}></div>
+                </div>;
+            } else {
+                tempMenu = <div className={tempClassName}
+                                    onClick={this.props.changeMenu.bind(this, index)}
+                >
+                    {val}
+                </div>;
+            }
+
+            menuItem.push(tempMenu)
+        }
+        let childMenuDivs = childMenu.map((value, index) => {
+            return <div className='indexMenu__childMenu' key={value.url}>
+                <div className="indexMenu__childMenu-number">{index + 1}</div>
+                <div className="indexMenu__childMenu-week">{menus[this.props.currentMenu]}</div>
+                <div className="indexMenu__childMenu-title">{value.title}</div>
+                <Link to={value.url}>
+                    <div className="indexMenu__childMenu-mask">
+                        <DataLoading loadingColor="#fff" />
+                    </div>
+                </Link>
+            </div>
+        });
+
+
+        return (
+            <div className={indexGradient}>
+                <div className="indexMenu__l">
+                    <div className="indexMenu__logo">
+                        <div className="indexMenu__down"
+                             onClick={this.closeMenu}
+                        >
+
+                        </div>
+                    </div>
+                    <div className="indexMenu__menu-box">
+                        {menuItem}
+                    </div>
+                </div>
+                <div className="indexMenu__r">
+                    <div className="indexMenu__childMenu-box">
+                        {childMenuDivs}
+                    </div>
+                </div>
+            </div>
+        )
+    }
+}
 class IndexCarousel extends Component {
     constructor(props) {
         super(props);
         this.state = {
             currentIndex: 0,
+            currentMenu: 0,
             showLoading: true
         };
         this.changeIndex = this.changeIndex.bind(this);
         this.changeLoading = this.changeLoading.bind(this);
+        this.changeMenu = this.changeMenu.bind(this);
     }
     changeIndex(index) {
         this.setState({
             currentIndex: index
+        })
+    }
+    changeMenu(index) {
+        this.setState({
+            currentMenu: index
         })
     }
     changeLoading() {
@@ -145,10 +276,12 @@ class IndexCarousel extends Component {
                 <CarouselLeft currentIndex={this.state.currentIndex} />
                 <CarouselRight currentIndex={this.state.currentIndex} />
                 <CarouselMenu />
+                <CarouselMenuIcon />
                 <CarouselPagination currentIndex={this.state.currentIndex}
                                     changeIndex={this.changeIndex} />
                 <IndexMusicIcon changeLoading={this.changeLoading} />
                 <FullScreenLoading showLoading={this.state.showLoading} />
+                <IndexMenu currentMenu={this.state.currentMenu} changeMenu={this.changeMenu} />
             </div>
         )
     }

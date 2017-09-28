@@ -1,0 +1,164 @@
+.doc {
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: 100%;
+
+  background: #fff;
+}
+.doc__l {
+  width: 300px;
+  height: 100%;
+  padding-left: 65px;
+
+  box-shadow: 0 0 40px #ccc;
+
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+.doc__backToIndex {
+  position: absolute;
+  left: 20px;
+  top: 22px;
+
+  width: 32px;
+  height: 32px;
+
+  cursor: pointer;
+  background: url("../images/other/blackIndex.png") no-repeat center center;
+}
+.doc__name {
+  padding: 20px 0;
+
+  line-height: 36px;
+  font-weight: bold;
+  font-size: 20px;
+  color: #333;
+
+  @extend .change-line;
+}
+.doc__nav {
+  width: 100%;
+  height: auto;
+  padding-left: 20px;
+}
+.doc__nav-item {
+  width: 100%;
+  height: 22px;
+  line-height:22px;
+
+  font-size: 14px;
+  cursor: pointer;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.doc__nav-a {
+  color: #2d2d2d;
+
+  &:hover {
+    color: #cc7a6f;
+  }
+}
+.doc__nav-a_active {
+  color: #cc7a6f;
+}
+.doc__r {
+  width: 0;
+  flex: 1;
+}
+.doc__content {
+  width: 100%;
+  height: 100%;
+
+  overflow: auto;
+}
+.doc__content-main {
+  width: 850px;
+  padding: 0 50px;
+}
+.doc__content-field {
+  width: 100%;
+  margin: 40px 0;
+}
+.doc__title_level1 {
+  font-size: 20px;
+  font-weight: bold;
+  padding: 20px 0 45px 0;
+  border-top: 3px solid #333;
+}
+.doc__title_level2 {
+  border-top: 1px dashed #ccc;
+  font-size: 16px;
+  font-weight: bold;
+
+  padding: 25px 0 10px 30px;
+  
+  background: url("../images/menu/text.png") no-repeat left 23px;
+}
+.doc__p {
+  width: 100%;
+  margin: 15px 0;
+  line-height: 20px;
+
+  font-size: 14px;
+
+  @extend .change-line;
+}
+/******描述文字重要程度的**********/
+.doc__text_level1 {
+  color: #cc7a6f;
+}
+
+.doc__img {
+  width: 100%;
+  margin: 15px 0;
+
+  @include border-radius;
+
+  overflow: hidden;
+}
+
+
+.doc__top {
+  position: fixed;
+  right: 40px;
+  bottom: 40px;
+
+  width: 40px;
+  height: 100px;
+
+  background: #000;
+  @include border-radius(8px);
+  overflow: hidden;
+  cursor: pointer;
+
+  animation: docTop 3s 0s ease-in-out 3 alternate;
+}
+.doc__top-t {
+  width: 100%;
+  height: 50px;
+
+  border-bottom: 1px solid #fff;
+
+  background: url("../images/monday/top.png") no-repeat center center;
+  background-size: 20px 20px;
+}
+.doc__top-b {
+  width: 100%;
+  height: 50px;
+  line-height: 50px;
+
+  text-align: center;
+  font-size: 20px;
+  color: #fff;
+}
+@keyframes docTop {
+  from {
+    bottom: 100%;
+  }
+  to {
+    bottom: 70px;
+  }
+}

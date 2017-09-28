@@ -6,15 +6,29 @@ var OUTPUT = path.resolve(__dirname, './output');
 
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+var CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
-    entry: ['babel-polyfill',ENTRY + '/src/app/app.js'],
+    entry: [ENTRY + '/src/app/app.js'],
     output: {
         path: OUTPUT,
         filename: 'build.js'
     },
     module: {
         rules: [
+            /*{
+                test: require.resolve('jquery'),
+                use: [
+                    {
+                        loader: 'expose-loader',
+                        options: 'jQuery'
+                    },
+                    {
+                        loader: 'expose-loader', // 将$暴露为全局变量
+                        options: '$'
+                    }
+                ]
+            },*/
             {
                 test: /\.js$/,
                 exclude: ENTRY + 'node_modules',
@@ -55,10 +69,10 @@ module.exports = {
         ]
     },
     plugins: [
-        new webpack.optimize.CommonsChunkPlugin({
+        /*new webpack.optimize.CommonsChunkPlugin({
             name: 'vendor',
             filename: 'vendor-css.min.js',
-        }),
+        }),*/
         new webpack.DefinePlugin({
             'process.env': {
                 NODE_ENV: JSON.stringify('production')
@@ -75,7 +89,18 @@ module.exports = {
 			title: 'SHARK',
 			favicon: 'static/images/shark.ico',
 			template: 'index.html'
-		})
+		}),
+        new webpack.DllReferencePlugin({
+            context: __dirname,
+            name: 'dllLib_library',
+            manifest: require('./manifest.json'),
+        }),
+        new CopyWebpackPlugin(
+            [
+                {from:'./dllLib.dll.js', to: './dllLib.dll.js'}
+            ]
+        ),
+
     ]
 
 };
