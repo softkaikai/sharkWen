@@ -1,12 +1,14 @@
-var path = require('path');
-var webpack = require('webpack');
+const path = require('path');
+const webpack = require('webpack');
 
-var ENTRY = path.resolve(__dirname);
-var OUTPUT = path.resolve(__dirname, './output');
+const ENTRY = path.resolve(__dirname);
+const OUTPUT = path.resolve(__dirname, './output');
 
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-var CopyWebpackPlugin = require('copy-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const HappyPack = require('happypack');
+const happyThreadPool = HappyPack.ThreadPool({ size: 4 });
 
 module.exports = {
     entry: [ENTRY + '/src/app/app.js'],
@@ -32,25 +34,34 @@ module.exports = {
             {
                 test: /\.js$/,
                 exclude: ENTRY + 'node_modules',
-                loader: 'babel-loader',
-                query: {
-                    presets: ['es2015', 'react', 'stage-0']
-                }
+                use: [
+                    {
+                        loader: 'happypack/loader',
+                        options: {
+                            id: 'jsx'
+                        }
+                    }
+                ]
             },
             {
                 test: /\.(scss|css)$/,
                 exclude: ENTRY + 'node_modules',
                 use: ExtractTextPlugin.extract({
-                    fallback: 'style-loader',
+                    fallback: [
+                        {
+                            loader: 'style-loader',
+                            /*options: {
+                                id: 'styleCss'
+                            }*/
+                        }
+                    ],
                     use: [
                         {
-                            loader: 'css-loader',
+                            loader: 'happypack/loader',
                             options: {
-                                importLoaders: 2
+                                id: 'css'
                             }
-                        },
-                        'postcss-loader',
-                        'sass-loader'
+                        }
                     ]
                 })
             },
@@ -58,11 +69,11 @@ module.exports = {
 				test: /\.(png|jpg|gif)$/,
 				use: [
                   {
-                    loader: 'url-loader',
-                    options: {
-                        limit: 8192,
-                        name: 'images/[name].[ext]'
-                    }
+                      loader: 'url-loader',
+                      options: {
+                          limit: 8192,
+                          name: 'images/[name].[ext]'
+                      }
                   }
 				]
 			}
@@ -98,8 +109,37 @@ module.exports = {
         new CopyWebpackPlugin(
             [
                 {from:'./dllLib.dll.js', to: './dllLib.dll.js'}
-            ]
+            ],
+            {
+                copyUnmodified: true
+            }
         ),
+        new HappyPack({
+            id: 'jsx',
+            threadPool: happyThreadPool,
+            loaders: [
+                {
+                    loader: 'babel-loader',
+                    query: {
+                        presets: ['es2015', 'react', 'stage-0']
+                    }
+                }
+            ]
+        }),
+        new HappyPack({
+            id: 'css',
+            threadPool: happyThreadPool,
+            loaders: [
+                {
+                    loader: 'css-loader',
+                    options: {
+                        importLoaders: 2
+                    }
+                },
+                'postcss-loader',
+                'sass-loader'
+            ]
+        })
 
     ]
 
