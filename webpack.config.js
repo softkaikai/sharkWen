@@ -19,15 +19,11 @@ module.exports = {
     module: {
         rules: [
             /*{
-                test: require.resolve('jquery'),
+                test: path.resolve(__dirname, './src/utils/constant.js'),
                 use: [
                     {
                         loader: 'expose-loader',
-                        options: 'jQuery'
-                    },
-                    {
-                        loader: 'expose-loader', // 将$暴露为全局变量
-                        options: '$'
+                        options: 'CONSTANT'
                     }
                 ]
             },*/
@@ -114,6 +110,9 @@ module.exports = {
                 copyUnmodified: true
             }
         ),
+        new webpack.ProvidePlugin({
+            CONSTANT: path.resolve(__dirname, './src/utils/constant.js')
+        }),
         new HappyPack({
             id: 'jsx',
             threadPool: happyThreadPool,

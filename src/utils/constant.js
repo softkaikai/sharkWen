@@ -1,6 +1,9 @@
-const CONSTANT = {
-    name: 'kaikai'
+const LINK = {
+    imgDomain: 'http://ovegl1dz1.bkt.clouddn.com/'
 };
 
 
-export default CONSTANT;
+export {
+    LINK
+}
+

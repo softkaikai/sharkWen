@@ -7,7 +7,7 @@ class DocNav extends Component {
         Objs.removeClass('doc__nav-a_active');
         Objs.eq(index).addClass('doc__nav-a_active');
         $('.doc__content').animate({
-            scrollTop: $(id).offset().top
+            scrollTop: $(id).position().top
         }, 1200, 'easeOutCubic');
     }
     render() {
