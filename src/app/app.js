@@ -7,6 +7,9 @@ import "../css/all.scss"
 
 import IndexCarousel from '../components/IndexCarousel/IndexCarousel';
 import BitOperator from '../components/Monday/BitOperator'
+import CssImprovement from '../components/Monday/CssImprovement'
+
+console.log(CONSTANT);
 
 class App extends Component {
     render() {
@@ -33,7 +36,7 @@ ReactDOM.render(
         <Route path="/" component={App} >
             <IndexRoute component={IndexCarousel} />
             <Route path="monday" component={Monday}>
-                <Route path="bitOperator" component={BitOperator} />
+                <Route path="cssImprovement" component={CssImprovement} />
             </Route>
         </Route>
     </Router>,

@@ -122,6 +122,20 @@
   overflow: hidden;
 }
 
+.doc__code {
+  width: 100%;
+  margin: 15px 0;
+  padding: 15px;
+
+  line-height: 20px;
+
+  background: #f6f6f6;
+  color: #657b83;
+
+  @include border-all(1px);
+  @include border-radius;
+}
+
 
 .doc__top {
   position: fixed;

@@ -114,7 +114,7 @@ class IndexMusicIcon extends Component {
         this.switchSong = this.switchSong.bind(this);
     }
     songLoad() {
-        this.refs.myAudio.play();
+        // this.refs.myAudio.play();
         this.refs.myAudio.volume = 0.5;
         this.props.changeLoading();
     }
@@ -146,7 +146,7 @@ import FullScreenLoading from '../Loading/FullScreenLoading';
 let gradientArr = ['red-gradient','pink-gradient','orange-gradient','yellow-gradient','green-gradient','blue-gradient','purple-gradient',];
 let menus = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
 let menuIcons = ['indexMenu__icon-text','indexMenu__icon-table','indexMenu__icon-setting','indexMenu__icon-internation','indexMenu__icon-game','indexMenu__icon-picture','indexMenu__icon-star'];
-let childMenu = [
+/*let childMenu = [
     {
         title: 'js位运算符妙用☺',
         url: '/monday/bitOperator'
@@ -175,7 +175,8 @@ let childMenu = [
         title: '2008年北京奥运会',
         url: '/monday/6'
     }
-];
+];*/
+let childMenu = CONSTANT.MENU['Monday'];
 import DataLoading from '../Loading/DataLoading';
 class IndexMenu extends Component {
     closeMenu = () => {
@@ -189,6 +190,7 @@ class IndexMenu extends Component {
             let tempClassName = 'indexMenu__menu-item';
             let tempMenu = '';
             if(this.props.currentMenu === index) {
+                childMenu = CONSTANT.MENU[val];
                 tempClassName += ' indexMenu__menu-item_active';
                 tempMenu = <div className={tempClassName}
                                      onClick={this.props.changeMenu.bind(this, index)}
