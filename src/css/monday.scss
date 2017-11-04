@@ -108,9 +108,15 @@
 
   @extend .change-line;
 }
+.doc__link {
+  color: $blue;
+}
 /******描述文字重要程度的**********/
 .doc__text_level1 {
   color: #cc7a6f;
+}
+.doc__text_heavy {
+  font-weight: bold;
 }
 
 .doc__img {
