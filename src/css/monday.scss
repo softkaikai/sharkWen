@@ -99,6 +99,16 @@
   
   background: url("../images/menu/text.png") no-repeat left 23px;
 }
+.doc__title_level3 {
+  width: 100%;
+  margin: 15px 0;
+  line-height: 20px;
+
+  font-size: 15px;
+  font-weight: bold;
+
+  @extend .change-line;
+}
 .doc__p {
   width: 100%;
   margin: 15px 0;
@@ -124,6 +134,7 @@
   margin: 15px 0;
 
   @include border-radius;
+  @include border-all(1px);
 
   overflow: hidden;
 }
