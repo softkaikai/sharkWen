@@ -22,7 +22,7 @@ let nav = [
     {id: '#maintain', name: '可维护、可复用css代码'},
     {id: '#bem', name: 'BEM'}
 ];
-class BitOperator extends Component {
+class CssImprovement extends Component {
     componentDidMount = () => {
         setTimeout(() => {
             $('.doc__content').scroll(function() {
@@ -383,4 +383,4 @@ css
     }
 }
 
-export default BitOperator;
+export default CssImprovement;

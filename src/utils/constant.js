@@ -35,8 +35,8 @@ const MENU = {
     ],
     Tuesday: [
         {
-            title: 'js位运算符妙用☺',
-            url: '/tuesday/bitOperator'
+            title: '吃啥呢？',
+            url: '/tuesday/marquee'
         }
     ],
     Wednesday: [

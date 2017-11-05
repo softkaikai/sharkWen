@@ -1,0 +1,30 @@
+.marquee {
+
+}
+.marquee__box {
+  width: 600px;
+  height: 600px;
+  margin: 20px auto;
+
+  text-align: center;
+
+}
+.marquee__table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 2px;
+}
+.marquee__table tr {
+  height: 100px;
+
+}
+.marquee__table td {
+  border: 1px solid #999;
+  vertical-align: middle;
+}
+.marquee__item {
+
+}
+.marquee__th_active {
+  background: orange;
+}
